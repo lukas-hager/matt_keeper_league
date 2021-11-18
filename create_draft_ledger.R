@@ -24,3 +24,6 @@ matt_db <- picks %>%
   left_join(users %>% 
               select(user_id, display_name),
             by = c('picked_by' = 'user_id'))
+
+write_csv(matt_db,
+          '~/Downloads/matt_db.csv')
