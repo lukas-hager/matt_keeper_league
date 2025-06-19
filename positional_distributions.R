@@ -14,7 +14,7 @@ library(tidyverse)
 league_id <- '650808198130929664'
 
 all_matchups <- bind_rows(
-  lapply(c(1:11), function(week_val){
+  lapply(c(1:14), function(week_val){
     httr::GET(str_interp('https://api.sleeper.app/v1/league/${league_id}/matchups/${week_val}')) %>% 
       httr::content(as = 'text') %>% 
       jsonlite::fromJSON() %>% 
@@ -61,5 +61,6 @@ matchups_positions_unique <- all_matchups %>%
             min = min(starters_points),
             median = median(starters_points),
             mean = mean(starters_points),
-            max = max(starters_points)) %>% 
+            max = max(starters_points),
+            var = var(starters_points)) %>% 
   ungroup()
